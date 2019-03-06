@@ -1,17 +1,17 @@
 [
   {
     "name": "Scott Brison",
-    "startDate": "11-04-2015",
-    "endDate": "01-14-2019"
+    "startDate": "2015-11-04",
+    "endDate": "2019-01-14"
   },
   {
     "name": "Jane Philpott",
-    "startDate": "01-14-2019",
-    "endDate": "03-04-2019"
+    "startDate": "2019-01-14",
+    "endDate": "2019-03-04"
   },
   {
     "name": "Carla Qualtrough",
-    "startDate": "03-04-2019",
+    "startDate": "2019-03-04",
     "endDate": null
   }
 ]

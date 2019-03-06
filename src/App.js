@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import moment from 'moment'
 import './App.css';
 
 const ministers = require("./ministers.json");
 const treasuryBoardStartDate = "2018-02-12"
 
 const daysSince = (dateString) => {
-  return Math.floor((new Date() - new Date(dateString)) / (1000*60*60*24))
+  const diff = moment().diff(moment(dateString))
+  const duration = moment.duration(diff).asDays()
+  return Math.floor(duration)
 }
 
 class App extends Component {
