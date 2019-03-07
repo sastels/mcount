@@ -1,9 +1,20 @@
-import React, { Component } from 'react';
+/** @jsx jsx */
+import { Component } from 'react';
 import moment from 'moment'
-import './App.css';
+import { css, jsx } from '@emotion/core'
 
 const ministers = require("./ministers.json");
-const treasuryBoardStartDate = "2018-02-12"
+
+const appStyle = css`
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-align: center;
+  margin: 100px;
+`
+
+const headerStyle = css` 
+  padding: 50px;
+  font-weight: 400;
+`
 
 const daysSince = (dateString) => {
   const diff = moment().diff(moment(dateString))
@@ -19,18 +30,12 @@ class App extends Component {
   }
 
   render() {
-    const ministerCount = this.state.ministers.length
     const currentMinister = this.state.ministers.slice(-1)[0]
     const daysSinceChange = daysSince(currentMinister.startDate)
 
     return (
-      <div className="App">
-        <h1>
-          I have had {ministerCount} Ministers since joining Treasury Board
-          on {treasuryBoardStartDate}.
-        </h1>
-        
-        <h1>
+      <div css={appStyle}>
+        <h1 css={headerStyle}>
           It has been {daysSinceChange} days since getting a new Minister.
         </h1>
       </div>
