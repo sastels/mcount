@@ -1,6 +1,3 @@
-# docker image build -t mcount:v1 .
-# docker container run -it -p 3000:3000 mcount:v1
-
 FROM node:11-alpine
 
 WORKDIR /app
