@@ -4,7 +4,7 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"kind":"Deployment","apiVersion":"apps/v1beta1","metadata":{"name":"frontend","creationTimestamp":null,"labels":{"run":"frontend"}},"spec":{"replicas":1,"selector":{"matchLabels":{"run":"frontend"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"run":"frontend"}},"spec":{"containers":[{"name":"frontend","image":"gcr.io/mcount/frontend:v1","ports":[{"containerPort":3000}],"resources":{}}]}},"strategy":{}},"status":{}}
+      {"kind":"Deployment","apiVersion":"apps/v1beta1","metadata":{"name":"frontend","creationTimestamp":null,"labels":{"run":"frontend"}},"spec":{"replicas":1,"selector":{"matchLabels":{"run":"frontend"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"run":"frontend"}},"spec":{"containers":[{"name":"frontend","image":"gcr.io/mcount/frontend:v1.1","ports":[{"containerPort":3000}],"resources":{}}]}},"strategy":{}},"status":{}}
   creationTimestamp: null
   generation: 1
   labels:
@@ -30,7 +30,7 @@ spec:
         run: frontend
     spec:
       containers:
-      - image: gcr.io/mcount/frontend:v1
+      - image: gcr.io/mcount/frontend:v1.1
         imagePullPolicy: IfNotPresent
         name: frontend
         ports:
