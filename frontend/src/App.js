@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://api-service:4000/data")
+    fetch("http://localhost:4000/data")
     .then(response => {
       return response.json()
     })
