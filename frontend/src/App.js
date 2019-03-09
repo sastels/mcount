@@ -3,8 +3,6 @@ import { Component } from 'react';
 import moment from 'moment'
 import { css, jsx } from '@emotion/core'
 
-const ministers = require("./ministers.json");
-
 const appStyle = css`
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
@@ -26,13 +24,25 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { ministers }
+    this.state = { ministers: [] }
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:4000/data")
+    .then(response => {
+      return response.json()
+    })
+    .then(ministers => {
+      this.setState({ministers})
+    })
+    .catch(error => {
+      console.log("Error:", error)
+    })
   }
 
   render() {
     const currentMinister = this.state.ministers.slice(-1)[0]
-    const daysSinceChange = daysSince(currentMinister.startDate)
-
+    const daysSinceChange = currentMinister ? daysSince(currentMinister.startDate) : 'unknown'
     return (
       <div css={appStyle}>
         <h1 css={headerStyle}>

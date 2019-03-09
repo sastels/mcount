@@ -4,20 +4,20 @@ metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"kind":"Deployment","apiVersion":"apps/v1beta1","metadata":{"name":"frontend","creationTimestamp":null,"labels":{"run":"frontend"}},"spec":{"replicas":1,"selector":{"matchLabels":{"run":"frontend"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"run":"frontend"}},"spec":{"containers":[{"name":"frontend","image":"gcr.io/mcount/frontend:v1.1","ports":[{"containerPort":3000}],"resources":{}}]}},"strategy":{}},"status":{}}
+      {"kind":"Deployment","apiVersion":"apps/v1beta1","metadata":{"name":"api","creationTimestamp":null,"labels":{"run":"api"}},"spec":{"replicas":1,"selector":{"matchLabels":{"run":"api"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"run":"api"}},"spec":{"containers":[{"name":"api","image":"gcr.io/mcount/api:v1","ports":[{"containerPort":4000}],"resources":{}}]}},"strategy":{}},"status":{}}
   creationTimestamp: null
   generation: 1
   labels:
-    run: frontend
-  name: frontend
-  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/frontend
+    run: api
+  name: api
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/api
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      run: frontend
+      run: api
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -27,14 +27,14 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        run: frontend
+        run: api
     spec:
       containers:
-      - image: gcr.io/mcount/frontend:v1.1
+      - image: gcr.io/mcount/api:v1
         imagePullPolicy: IfNotPresent
-        name: frontend
+        name: api
         ports:
-        - containerPort: 3000
+        - containerPort: 4000
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log
