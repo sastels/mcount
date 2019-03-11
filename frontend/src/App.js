@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/data")
+    fetch("/data")
     .then(response => {
       return response.json()
     })
@@ -42,11 +42,13 @@ class App extends Component {
 
   render() {
     const currentMinister = this.state.ministers.slice(-1)[0]
-    const daysSinceChange = currentMinister ? daysSince(currentMinister.startDate) : 'unknown'
+    const message = currentMinister ? 
+    ( `It has been ${daysSince(currentMinister.startDate)} days since getting a new Minister.`) : ""
+     
     return (
       <div css={appStyle}>
         <h1 css={headerStyle}>
-          It has been {daysSinceChange} days since getting a new Minister.
+          {message}     
         </h1>
       </div>
     );
