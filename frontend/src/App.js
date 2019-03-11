@@ -3,6 +3,8 @@ import { Component } from 'react';
 import moment from 'moment'
 import { css, jsx } from '@emotion/core'
 
+const version = '1.2'
+
 const appStyle = css`
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
@@ -28,7 +30,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/data")
+    fetch("/data")
     .then(response => {
       return response.json()
     })
@@ -42,12 +44,17 @@ class App extends Component {
 
   render() {
     const currentMinister = this.state.ministers.slice(-1)[0]
-    const daysSinceChange = currentMinister ? daysSince(currentMinister.startDate) : 'unknown'
+    const message = currentMinister ? 
+    ( `It has been ${daysSince(currentMinister.startDate)} days since getting a new Minister.`) : ""
+     
     return (
-      <div css={appStyle}>
-        <h1 css={headerStyle}>
-          It has been {daysSinceChange} days since getting a new Minister.
-        </h1>
+      <div>
+        <p>{version}</p>
+        <div css={appStyle}>
+          <h1 css={headerStyle}>
+            {message}     
+          </h1>
+        </div>
       </div>
     );
   }
