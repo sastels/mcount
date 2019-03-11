@@ -18,4 +18,4 @@ or using docker with
 docker-compose up
 ```
 
-You can also deploy the two parts and relevant services to k8s on Google Cloud using the files in the `manifest` directories (this... is the whole point). This isn't quite working (the two apps aren't talking to each other yet).
+You can also deploy the two parts and relevant services to k8s on Google Cloud using the files in the `manifest` directories (this... is the whole point).

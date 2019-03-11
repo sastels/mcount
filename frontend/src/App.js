@@ -3,6 +3,8 @@ import { Component } from 'react';
 import moment from 'moment'
 import { css, jsx } from '@emotion/core'
 
+const version = '1.2'
+
 const appStyle = css`
   font-family: "Comic Sans MS", cursive, sans-serif;
   text-align: center;
@@ -46,10 +48,13 @@ class App extends Component {
     ( `It has been ${daysSince(currentMinister.startDate)} days since getting a new Minister.`) : ""
      
     return (
-      <div css={appStyle}>
-        <h1 css={headerStyle}>
-          {message}     
-        </h1>
+      <div>
+        <p>{version}</p>
+        <div css={appStyle}>
+          <h1 css={headerStyle}>
+            {message}     
+          </h1>
+        </div>
       </div>
     );
   }
