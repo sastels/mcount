@@ -4,7 +4,9 @@ services:
     build: frontend
     ports:
      - "3000:3000"
-  api:
+    links:
+      - api-service
+  api-service:
     build: api
     ports:
      - "4000:4000"
