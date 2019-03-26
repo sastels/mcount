@@ -3,7 +3,7 @@ import { Component } from 'react';
 import moment from 'moment'
 import { css, jsx } from '@emotion/core'
 
-const version = '1.2'
+const version = '2.0'
 
 const appStyle = css`
   font-family: "Comic Sans MS", cursive, sans-serif;
