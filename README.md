@@ -42,7 +42,17 @@ az group delete --name sja-test-ResourceGroup --yes --no-wait
 
 ### Setup Google Cloud
 
-???
+Make a new project `sja-test-project` and enable Kubernetes Engine API for it.
+
+```
+gcloud auth login
+
+gcloud config set project sja-test-project
+gcloud config set compute/zone northamerica-northeast1
+gcloud container clusters create --num-nodes=1 sja-gc-cluster
+
+gcloud container clusters get-credentials sja-gc-cluster
+```
 
 ### Deploy
 
@@ -53,4 +63,10 @@ kubectl create -f frontend/manifests/frontend-deployment.yaml
 kubectl create -f frontend/manifests/frontend-service.yaml
 kubectl create -f api/manifests/api-deployment.yaml
 kubectl create -f api/manifests/api-service.yaml
+```
+
+To get the IP to connect to frontend, run
+
+```
+kubectl get service
 ```
