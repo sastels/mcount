@@ -30,15 +30,15 @@ spec:
         run: frontend
     spec:
       containers:
-      - image: gcr.io/mcount/frontend
-        imagePullPolicy: Always
-        name: frontend
-        ports:
-        - containerPort: 3000
-          protocol: TCP
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
+        - image: index.docker.io/sastels/mcount_frontend:latest
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
