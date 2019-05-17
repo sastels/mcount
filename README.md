@@ -21,7 +21,7 @@ docker-compose up
 
 You can also deploy the two parts and relevant services to k8s using the files in the `manifest` directories (this is the whole point).
 
-The manifest files currently point to docker images in DockerHub.
+The manifest files point to my docker images in DockerHub.
 
 ### Setup Azure
 
@@ -34,15 +34,9 @@ az aks create --resource-group sja-test-ResourceGroup --name sja-test-cluster --
 az aks get-credentials --resource-group sja-test-ResourceGroup --name=sja-test-cluster
 ```
 
-And when you're done
-
-```
-az group delete --name sja-test-ResourceGroup --yes --no-wait
-```
-
 ### Setup Google Cloud
 
-Make a new project `sja-test-project` and enable Kubernetes Engine API for it.
+In the Google Cloud [console](https://console.cloud.google.com/) make a new project `sja-test-project` and enable Kubernetes Engine API for it.
 
 ```
 gcloud auth login
@@ -56,9 +50,15 @@ gcloud container clusters get-credentials sja-gc-cluster
 
 ### Deploy
 
-```
-kubectl config get-contexts      # ensure we're connected to the new cluster
+Check that `kubectl` is connected to the cluster you just created.
 
+```
+kubectl config get-contexts
+```
+
+Now deploy the pods and services.
+
+```
 kubectl create -f frontend/manifests/frontend-deployment.yaml
 kubectl create -f frontend/manifests/frontend-service.yaml
 kubectl create -f api/manifests/api-deployment.yaml
@@ -70,3 +70,13 @@ To get the IP to connect to frontend, run
 ```
 kubectl get service
 ```
+
+## Clean Up
+
+Don't forget to delete the projects when you're done, so that Microsoft and/or Google don't bankrupt you. On Azure use
+
+```
+az group delete --name sja-test-ResourceGroup --yes --no-wait
+```
+
+while on Google Cloud you can delete the project via the [console](https://console.cloud.google.com/).
