@@ -1,0 +1,7 @@
+configMapGenerator:
+  - name: mcount-base
+    files:
+      - api-deployment.yaml
+      - api-service.yaml
+      - frontend-deployment.yaml
+      - frontend-service.yaml
