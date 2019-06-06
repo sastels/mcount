@@ -9,7 +9,7 @@ There are two parts:
 
 No political statement is intended. It simply struck me on the bus home one day (a day when the President of TBS had resigned) that it might be a good, easy example to use to learn k8s with.
 
-## Local
+## docker-compose
 
 Locally you can run the two apps using docker:
 
@@ -17,13 +17,19 @@ Locally you can run the two apps using docker:
 docker-compose up
 ```
 
-## Cloud
+## Setup kubernetes
 
 You can also deploy the two parts and relevant services to k8s using the files in the `manifest` directories (this is the whole point).
 
 The manifest files point to my docker images in DockerHub.
 
-### Setup Azure
+### Minikube
+
+```
+minikube start
+```
+
+### Azure
 
 ```
 az login
@@ -34,9 +40,9 @@ az aks create --resource-group sja-test-ResourceGroup --name sja-test-cluster --
 az aks get-credentials --resource-group sja-test-ResourceGroup --name=sja-test-cluster
 ```
 
-### Setup Google Cloud
+### Google Cloud
 
-In the Google Cloud [console](https://console.cloud.google.com/) make a new project `sja-test-project` and enable Kubernetes Engine API for it.
+In the Google Cloud [console](https://console.cloud.google.com/) make a new project `sja-test-project` and enable Kubernetes Engine API for it. Then run the following.
 
 ```
 gcloud auth login
@@ -48,7 +54,7 @@ gcloud container clusters create --num-nodes=1 sja-gc-cluster
 gcloud container clusters get-credentials sja-gc-cluster
 ```
 
-### Deploy
+## Deploy
 
 Check that `kubectl` is connected to the cluster you just created.
 
@@ -56,14 +62,13 @@ Check that `kubectl` is connected to the cluster you just created.
 kubectl config get-contexts
 ```
 
-Now deploy the pods and services.
+Now use kustomize to deploy the appropriate overlay.
 
 ```
-kubectl create -f frontend/manifests/frontend-deployment.yaml
-kubectl create -f frontend/manifests/frontend-service.yaml
-kubectl create -f api/manifests/api-deployment.yaml
-kubectl create -f api/manifests/api-service.yaml
+kubectl apply -k manifests/overlays/minikube
 ```
+
+where `minikube` may be replaced by `aks` or `gke`.
 
 To get the IP to connect to frontend, run
 
@@ -73,10 +78,24 @@ kubectl get service
 
 ## Clean Up
 
-Don't forget to delete the projects when you're done, so that Microsoft and/or Google don't bankrupt you. On Azure use
+Don't forget to delete the projects when you're done, so that Microsoft and/or Google don't bankrupt you.
+
+### Minikube
+
+```
+minikube delete
+```
+
+### Azure
 
 ```
 az group delete --name sja-test-ResourceGroup --yes --no-wait
 ```
 
-while on Google Cloud you can delete the project via the [console](https://console.cloud.google.com/).
+### Google
+
+```
+gcloud container clusters delete sja-gc-cluster
+```
+
+You can delete the project via the [console](https://console.cloud.google.com/).

@@ -9,13 +9,11 @@ metadata:
 spec:
   externalTrafficPolicy: Cluster
   ports:
-  - nodePort: 31760
-    port: 80
-    protocol: TCP
-    targetPort: 3000
+    - nodePort: 31760
+      port: 80
+      protocol: TCP
+      targetPort: 3000
   selector:
     run: frontend
   sessionAffinity: None
   type: LoadBalancer
-status:
-  loadBalancer: {}
