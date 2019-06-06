@@ -1,7 +1,7 @@
-configMapGenerator:
-  - name: mcount-base
-    files:
-      - api-deployment.yaml
-      - api-service.yaml
-      - frontend-deployment.yaml
-      - frontend-service.yaml
+resources:
+- api-deployment.yaml
+- api-service.yaml
+- frontend-deployment.yaml
+- frontend-service.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
