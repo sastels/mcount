@@ -29,6 +29,12 @@ The manifest files point to my docker images in DockerHub.
 minikube start
 ```
 
+### Kind
+
+```
+kind create cluster --config kind-config.yaml
+```
+
 ### Azure
 
 ```
@@ -68,12 +74,18 @@ Now use kustomize to deploy the appropriate overlay.
 kubectl apply -k manifests/overlays/minikube
 ```
 
-where `minikube` may be replaced by `aks` or `gke`.
+where `minikube` may be replaced by `kind`, `aks` or `gke`.
 
 To get the IP to connect to frontend, run
 
 ```
 kubectl get service
+```
+
+or
+
+```
+minikube service --url frontend-service
 ```
 
 ## Clean Up
@@ -84,6 +96,12 @@ Don't forget to delete the projects when you're done, so that Microsoft and/or G
 
 ```
 minikube delete
+```
+
+### Kind
+
+```
+kind delete cluster
 ```
 
 ### Azure
